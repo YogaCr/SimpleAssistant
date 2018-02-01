@@ -9,10 +9,11 @@ namespace SimpleAssistant
     {
         string greeting;
         string lokasi = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "SimpleAI");
-        public bool ScriptDiam(ComboBox S, Image Balon,Grid diam) {
-            Balon.Visibility = Visibility.Hidden;
-            diam.Visibility = Visibility.Hidden;
-            if (S.Text== "On")
+
+        public bool ScriptDiam(ComboBox PilihanDiam, Image BalonTeks,Grid Diam) {
+            BalonTeks.Visibility = Visibility.Hidden;
+            Diam.Visibility = Visibility.Hidden;
+            if (PilihanDiam.Text== "On")
             {
                 return false;
             }
@@ -82,6 +83,26 @@ namespace SimpleAssistant
                 }
             }
         }
+
+        public void GantiNama(string namalama,string namabaru) {
+            try { File.Move(@lokasi + "/" + namalama, @lokasi + "/" + namabaru); }
+            catch
+            {
+                MessageBox.Show("Gagal merubah nama", "Error");
+            }
+        }
+
+        public void HapusNote(string nama) {
+            try
+            {
+                File.Delete(@lokasi + "/" + nama);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
         public void TutupNote(Image BT,Grid Note) {
             BT.Visibility = Visibility.Hidden;
             Note.Visibility = Visibility.Hidden;

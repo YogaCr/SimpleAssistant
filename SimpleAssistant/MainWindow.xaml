@@ -7,53 +7,99 @@
         mc:Ignorable="d"
         Title="Simple Assistant" Height="481.25" Width="649.816" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" MouseLeftButtonDown="Klik" ResizeMode="NoResize">
     <Grid>
-        <Image x:Name="BTKanan" HorizontalAlignment="Left" Height="287" Margin="303,55,0,0" VerticalAlignment="Top" Width="337" Source="baloon text.png"/>
+        <Grid x:Name="BaloonText">
+            <Image x:Name="BTKanan" HorizontalAlignment="Left" Height="287" Margin="303,55,0,0" VerticalAlignment="Top" Width="337" Source="baloon text.png" Visibility="Hidden"/>
+            <Image x:Name="BTKiri" Margin="1,11,312,183" Source="baloon text.png" RenderTransformOrigin="0.5,0.5" Height="287" Width="337" Visibility="Hidden">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
         <Image x:Name="image" HorizontalAlignment="Left" Height="243" Margin="220,238,0,0" VerticalAlignment="Top" Width="181" Source="kiri1.png"/>
-        <Image x:Name="BTKiri" Margin="-3,32,331,175" Source="baloon text.png" RenderTransformOrigin="0.5,0.5" Height="274" Width="322" Visibility="Hidden">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Grid x:Name="MenuKanan" Visibility="Hidden">
-            <ComboBox x:Name="PilihanKanan" HorizontalAlignment="Left" Margin="368,147,0,0" VerticalAlignment="Top" Width="220" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Arial Rounded MT Bold" FontSize="16">
-                <ComboBoxItem Content="Pindah"/>
-                <ComboBoxItem Content="Diam"/>
-                <ComboBoxItem Content="Note"/>
-            </ComboBox>
-            <Label x:Name="GreetingKanan" Content="ggg" HorizontalAlignment="Left" Margin="368,74,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="220" Height="68" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
-            <Button x:Name="PilihKanan" Content="Pilih" HorizontalAlignment="Left" Margin="440,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
+        <Grid x:Name="Menu">
+            <Grid x:Name="MenuKanan" Visibility="Hidden">
+                <ComboBox x:Name="PilihanKanan" HorizontalAlignment="Left" Margin="368,147,0,0" VerticalAlignment="Top" Width="220" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Arial Rounded MT Bold" FontSize="16">
+                    <ComboBoxItem Content="Pindah"/>
+                    <ComboBoxItem Content="Diam"/>
+                    <ComboBoxItem Content="Note"/>
+                </ComboBox>
+                <Label x:Name="GreetingKanan" Content="ggg" HorizontalAlignment="Left" Margin="368,74,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="220" Height="68" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
+                <Button x:Name="PilihKanan" Content="Pilih" HorizontalAlignment="Left" Margin="440,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
+            </Grid>
+            <Grid x:Name="MenuKiri" Visibility="Hidden">
+                <ComboBox x:Name="PilihanKiri" HorizontalAlignment="Left" Margin="58,147,0,0" VerticalAlignment="Top" Width="220" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Arial Rounded MT Bold" FontSize="16">
+                    <ComboBoxItem Content="Pindah"/>
+                    <ComboBoxItem Content="Diam"/>
+                    <ComboBoxItem Content="Note"/>
+                </ComboBox>
+                <Label x:Name="GreetingKiri" Content="ggg" HorizontalAlignment="Left" Margin="58,74,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="220" Height="68" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
+                <Button x:Name="PilihKiri" Content="Pilih" HorizontalAlignment="Left" Margin="130,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
+            </Grid>
         </Grid>
-        <Grid x:Name="DiamKanan" Visibility="Hidden">
-            <ComboBox x:Name="DiamSwitchKanan" HorizontalAlignment="Left" Margin="480,130,0,0" VerticalAlignment="Top" Width="100" FontFamily="Arial Rounded MT Bold" FontSize="18">
-                <ComboBoxItem Content="On" />
-                <ComboBoxItem Content="Off"/>
-            </ComboBox>
-            <Label x:Name="labelDiamKanan" Content="Diam" HorizontalAlignment="Left" Margin="391,126,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
-            <Button x:Name="buttonDiamKanan" Content="OK" HorizontalAlignment="Left" Margin="446,168,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" FontSize="18" Background="{x:Null}" BorderBrush="{x:Null}" Click="Diam"/>
-
+        <Grid x:Name="GridDiam">
+            <Grid x:Name="DiamKanan" Visibility="Hidden">
+                <ComboBox x:Name="DiamSwitchKanan" HorizontalAlignment="Left" Margin="480,130,0,0" VerticalAlignment="Top" Width="100" FontFamily="Arial Rounded MT Bold" FontSize="18">
+                    <ComboBoxItem Content="On" />
+                    <ComboBoxItem Content="Off"/>
+                </ComboBox>
+                <Label x:Name="labelDiamKanan" Content="Diam" HorizontalAlignment="Left" Margin="391,126,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
+                <Button x:Name="buttonDiamKanan" Content="OK" HorizontalAlignment="Left" Margin="446,168,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" FontSize="18" Background="{x:Null}" BorderBrush="{x:Null}" Click="Diam"/>
+                <Label x:Name="LDKanan" Content="Apakah saya harus diam di tempat?" HorizontalAlignment="Left" Margin="328,97,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
+            </Grid>
+            <Grid x:Name="DiamKiri" Visibility="Hidden">
+                <ComboBox x:Name="DiamSwitchKiri" HorizontalAlignment="Left" Margin="167,130,0,0" VerticalAlignment="Top" Width="100" FontFamily="Arial Rounded MT Bold" FontSize="18">
+                    <ComboBoxItem Content="On" />
+                    <ComboBoxItem Content="Off"/>
+                </ComboBox>
+                <Label x:Name="labelDiamKiri" Content="Diam" HorizontalAlignment="Left" Margin="78,126,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
+                <Button x:Name="buttonDiamKiri" Content="OK" HorizontalAlignment="Left" Margin="133,168,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" FontSize="18" Background="{x:Null}" BorderBrush="{x:Null}" Click="Diam"/>
+                <Label x:Name="LDKiri" Content="Apakah saya harus diam di tempat?" HorizontalAlignment="Left" Margin="27,97,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
+            </Grid>
         </Grid>
-        <Grid x:Name="PindahKanan" Visibility="Hidden">
-            <Label x:Name="PindahKananLabel" Content="Geser kursormu ke posisi&#10;yang kamu inginkan. &#10;Jika sudah,klik saja aku." HorizontalAlignment="Left" Margin="360,89,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
-            <Button x:Name="PindahKananButton" Margin="442,166,144,292" FontFamily="Arial Rounded MT Bold" Content="OK" Background="{x:Null}" Click="Pilih" FontSize="18"></Button>
+        <Grid x:Name="Pindah">
+            <Grid x:Name="PindahKanan" Visibility="Hidden">
+                <Label x:Name="PindahKananLabel" Content="Geser kursormu ke posisi&#10;yang kamu inginkan. &#10;Jika sudah,klik saja aku." HorizontalAlignment="Left" Margin="360,89,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
+                <Button x:Name="PindahKananButton" Margin="442,166,144,292" FontFamily="Arial Rounded MT Bold" Content="OK" Background="{x:Null}" Click="Pilih" FontSize="18"></Button>
+            </Grid>
+            <Grid x:Name="PindahKiri" Visibility="Hidden">
+                <Label x:Name="PindahKiriLabel" Content="Geser kursormu ke posisi&#10;yang kamu inginkan. &#10;Jika sudah,klik saja aku." HorizontalAlignment="Left" Margin="50,89,0,0" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="18"/>
+                <Button x:Name="PindahKiriButton" Margin="132,166,454,292" FontFamily="Arial Rounded MT Bold" Content="OK" Background="{x:Null}" Click="Pilih" FontSize="18"></Button>
+            </Grid>
         </Grid>
-        <Grid x:Name="NoteKanan" Visibility="Hidden">
-            <RichTextBox x:Name="TextKanan" HorizontalAlignment="Left" Height="56" Margin="364,109,0,0" VerticalAlignment="Top" Width="227" VerticalScrollBarVisibility="Auto" FontFamily="Arial Rounded MT Bold" Block.LineHeight="1" KeyUp="SimpanNote">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text=""/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-            <ComboBox x:Name="ComboNoteKanan" HorizontalAlignment="Left" Margin="364,82,0,0" VerticalAlignment="Top" Width="151" BorderBrush="{x:Null}" Background="{x:Null}" SelectionChanged="NotePilih" FontFamily="Arial Rounded MT Bold"/>
-            <Button x:Name="TambahNoteKanan" Content="Tambah" HorizontalAlignment="Left" Margin="520,84,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" FontFamily="Arial Rounded MT Bold"/>
-            <Button x:Name="GantiNamaKanan" Content="Ganti" HorizontalAlignment="Left" Margin="381,170,0,0" VerticalAlignment="Top" Width="52" Background="{x:Null}" FontFamily="Arial Rounded MT Bold"/>
-            <Button x:Name="HapusKanan" Content="Hapus" HorizontalAlignment="Left" Margin="444,170,0,0" VerticalAlignment="Top" Width="53" Background="{x:Null}" FontFamily="Arial Rounded MT Bold"/>
-            <Button x:Name="TutupNoteKanan" Content="Tutup" HorizontalAlignment="Left" Margin="507,170,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
+        <Grid x:Name="Note">
+            <Grid x:Name="NoteKanan" Visibility="Hidden">
+                <RichTextBox x:Name="TextKanan" HorizontalAlignment="Left" Height="56" Margin="364,109,0,0" VerticalAlignment="Top" Width="227" VerticalScrollBarVisibility="Auto" FontFamily="Arial Rounded MT Bold" Block.LineHeight="1" KeyUp="SimpanNote">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <ComboBox x:Name="ComboNoteKanan" HorizontalAlignment="Left" Margin="364,82,0,0" VerticalAlignment="Top" Width="151" BorderBrush="{x:Null}" Background="{x:Null}" SelectionChanged="NotePilih" FontFamily="Arial Rounded MT Bold"/>
+                <Button x:Name="TambahNoteKanan" Content="Tambah" HorizontalAlignment="Left" Margin="520,84,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TambahNote"/>
+                <Button x:Name="GantiNamaKanan" Content="Ganti" HorizontalAlignment="Left" Margin="381,170,0,0" VerticalAlignment="Top" Width="52" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="GantiNote"/>
+                <Button x:Name="HapusKanan" Content="Hapus" HorizontalAlignment="Left" Margin="444,170,0,0" VerticalAlignment="Top" Width="53" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="HapusNote"/>
+                <Button x:Name="TutupNoteKanan" Content="Tutup" HorizontalAlignment="Left" Margin="507,170,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
+            </Grid>
+            <Grid x:Name="NoteKiri" Visibility="Hidden">
+                <RichTextBox x:Name="TextKiri" HorizontalAlignment="Left" Height="56" Margin="61,115,0,0" VerticalAlignment="Top" Width="227" VerticalScrollBarVisibility="Auto" FontFamily="Arial Rounded MT Bold" Block.LineHeight="1" KeyUp="SimpanNote">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text=""/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <ComboBox x:Name="ComboNoteKiri" HorizontalAlignment="Left" Margin="61,88,0,0" VerticalAlignment="Top" Width="151" BorderBrush="{x:Null}" Background="{x:Null}" SelectionChanged="NotePilih" FontFamily="Arial Rounded MT Bold"/>
+                <Button x:Name="TambahNoteKiri" Content="Tambah" HorizontalAlignment="Left" Margin="217,90,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TambahNote"/>
+                <Button x:Name="GantiNamaKiri" Content="Ganti" HorizontalAlignment="Left" Margin="78,176,0,0" VerticalAlignment="Top" Width="52" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="GantiNote"/>
+                <Button x:Name="HapusKiri" Content="Hapus" HorizontalAlignment="Left" Margin="141,176,0,0" VerticalAlignment="Top" Width="53" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="HapusNote"/>
+                <Button x:Name="TutupNoteKiri" Content="Tutup" HorizontalAlignment="Left" Margin="204,176,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
