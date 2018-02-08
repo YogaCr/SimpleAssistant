@@ -19,18 +19,21 @@ namespace SimpleAssistant
 {
     public partial class MainWindow : Window
     {
-
-        DispatcherTimer waktu=new DispatcherTimer();
+        //membuat timer
+        DispatcherTimer waktu = new DispatcherTimer();
         DispatcherTimer tunggu = new DispatcherTimer();
 
+        //membuat objek dari class yang dibuat
         Perintah p = new Perintah();
         Bitmap b = new Bitmap();
+
         Random rand = new Random();
 
-        bool kiri = true, gerak = true, klik = true, pindah = false,BUgerak;
-        int jarak,tempuh;
-        byte r,x,t=0;
+        bool kiri = true, gerak = true, klik = true, pindah = false, BUgerak=true;
+        int jarak, tempuh;
+        byte r, x, t = 0;
 
+        //Lokasi di mana note nanti disimpan
         string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "SimpleAI");
 
         public MainWindow()
@@ -39,13 +42,13 @@ namespace SimpleAssistant
 
             this.Top = SystemParameters.WorkArea.Height - this.Height;
             this.Topmost = true;
-            
+
             waktu.Tick += new EventHandler(waktu_tick);
             waktu.Interval = new TimeSpan(0, 0, 0, 0, 50);
             tunggu.Tick += new EventHandler(tunggu_tick);
             tunggu.Interval = new TimeSpan(0, 0, 1);
-            
-            this.Left= SystemParameters.WorkArea.Width;
+
+            this.Left = SystemParameters.WorkArea.Width;
             jarak = (int)SystemParameters.WorkArea.Width / 2;
             waktu.Start();
         }
@@ -54,6 +57,8 @@ namespace SimpleAssistant
         {
             if ((sender as ComboBox).SelectedItem != null)
             {
+                TextKanan.IsEnabled = true;
+                TextKiri.IsEnabled = true;
                 if ((sender as ComboBox) == ComboNoteKanan)
                 {
                     TextKanan.Document.Blocks.Clear();
@@ -65,6 +70,11 @@ namespace SimpleAssistant
                     TextKiri.Document.Blocks.Add(new Paragraph(new Run(p.BukaNote(ComboNoteKiri.SelectedItem.ToString()))));
                 }
             }
+            else
+            {
+                TextKanan.IsEnabled = false;
+                TextKiri.IsEnabled = false;
+            }
         }
 
         private void TutupNote(object sender, RoutedEventArgs e)
@@ -72,10 +82,12 @@ namespace SimpleAssistant
             if ((sender as Button) == TutupNoteKanan)
             {
                 p.TutupNote(BTKanan, NoteKanan);
+                b.getbitmapkanan(0);
             }
             else if ((sender as Button) == TutupNoteKiri)
             {
                 p.TutupNote(BTKiri, NoteKiri);
+                b.getbitmapkiri(0);
             }
             gerak = BUgerak;
             tentu();
@@ -83,28 +95,28 @@ namespace SimpleAssistant
 
         private void SimpanNote(object sender, KeyEventArgs e)
         {
-            try
+            if (ComboNoteKanan.SelectedItem != null || ComboNoteKiri.SelectedItem != null)
             {
-                if (TextKanan.Visibility == Visibility.Visible)
+
+                if (NoteKanan.Visibility == Visibility.Visible)
                 {
                     p.SimpanNote(TextKanan, ComboNoteKanan.SelectedItem.ToString());
                 }
-                else if (TextKiri.Visibility == Visibility.Visible)
+                else if (NoteKiri.Visibility == Visibility.Visible)
                 {
                     p.SimpanNote(TextKiri, ComboNoteKiri.SelectedItem.ToString());
                 }
             }
-            catch
-            {
-                MessageBox.Show("ERROR");
-            }
+
         }
 
         private void TambahNote(object sender, RoutedEventArgs e)
         {
             InputForm i = new InputForm("Tambah Note");
-            if (i.ShowDialog() == true) {
-                using (StreamWriter sw = new StreamWriter(@path +"/"+ i.hasil())) {
+            if (i.ShowDialog() == true)
+            {
+                using (StreamWriter sw = new StreamWriter(@path + "/" + i.hasil()))
+                {
                     sw.Close();
                 }
                 if ((sender as Button) == TambahNoteKanan)
@@ -135,7 +147,8 @@ namespace SimpleAssistant
         private void GantiNote(object sender, RoutedEventArgs e)
         {
             InputForm i = new InputForm("Inputkan Nama Baru");
-            if (i.ShowDialog() == true) {
+            if (i.ShowDialog() == true)
+            {
                 if ((sender as Button).Name == "GantiNamaKanan")
                 {
                     p.GantiNama(ComboNoteKanan.SelectedItem.ToString(), i.hasil());
@@ -155,7 +168,8 @@ namespace SimpleAssistant
             {
                 gerak = p.ScriptDiam(DiamSwitchKanan, BTKanan, DiamKanan);
             }
-            else if ((sender as Button).Name == "buttonDiamKiri") {
+            else if ((sender as Button).Name == "buttonDiamKiri")
+            {
                 gerak = p.ScriptDiam(DiamSwitchKiri, BTKiri, DiamKiri);
             }
             klik = true;
@@ -189,6 +203,8 @@ namespace SimpleAssistant
                 else if (PilihanKanan.SelectedIndex == 2)
                 {
                     p.LoadNote(ComboNoteKanan, MenuKanan, NoteKanan);
+                    TextKanan.Document.Blocks.Clear();
+                    ComboNoteKanan.SelectedIndex = 0;
                     waktu.Stop();
                     BUgerak = gerak;
                     gerak = false;
@@ -212,13 +228,17 @@ namespace SimpleAssistant
                 else if (PilihanKiri.SelectedIndex == 2)
                 {
                     p.LoadNote(ComboNoteKiri, MenuKiri, NoteKiri);
+                    TextKiri.Document.Blocks.Clear();
+                    ComboNoteKiri.SelectedIndex = 0;
                     waktu.Stop();
                     BUgerak = gerak;
                     gerak = false;
                     tunggu.Stop();
                 }
+                
             }
-            else if ((sender as Button).Name == "PindahKananButton") {
+            else if ((sender as Button).Name == "PindahKananButton")
+            {
                 pindah = true;
                 BUgerak = gerak;
                 gerak = false;
@@ -252,7 +272,8 @@ namespace SimpleAssistant
                     image.Source = b.getclickedkanan();
                     MenuKanan.Visibility = Visibility.Visible;
                     BTKanan.Visibility = Visibility.Visible;
-                    
+                    PilihanKanan.SelectedIndex = 0;
+
                 }
                 else
                 {
@@ -260,9 +281,11 @@ namespace SimpleAssistant
                     image.Source = b.getclickedkiri();
                     BTKiri.Visibility = Visibility.Visible;
                     MenuKiri.Visibility = Visibility.Visible;
+                    PilihanKiri.SelectedIndex = 0;
                 }
             }
-            if (pindah) {
+            if (pindah)
+            {
                 x = 0;
                 pindah = false;
                 gerak = BUgerak;
@@ -271,66 +294,93 @@ namespace SimpleAssistant
             }
         }
 
-        private void waktu_tick(object o, EventArgs e) {
+        private void waktu_tick(object o, EventArgs e)
+        {
             if (gerak)
             {
+                
                 if (kiri)
                 {
                     if (tempuh < jarak)
-                    {   image.Source = b.getbitmapkiri(x);
+                    {
+                        image.Source = b.getbitmapkiri(x);
                         this.Left -= 10;
-                        tempuh += 10;}
+                        tempuh += 10;
+                    }
                     else
-                    {   image.Source = b.getbitmapkiri(0);
-                        tunggu.Start();}
+                    {
+                        image.Source = b.getbitmapkiri(0);
+                        tunggu.Start();
+                    }
                 }
                 else
                 {
                     if (tempuh < jarak)
-                    {   image.Source = b.getbitmapkanan(x);
+                    {
+                        image.Source = b.getbitmapkanan(x);
                         this.Left += 10;
-                        tempuh += 10;}
+                        tempuh += 10;
+                    }
                     else
-                    {   image.Source = b.getbitmapkanan(0);
-                        tunggu.Start();}
+                    {
+                        image.Source = b.getbitmapkanan(0);
+                        tunggu.Start();
+                    }
                 }
-                if (x < 5){x++;}
-                else{x = 0;}
+                if (x < 5) { x++; }
+                else { x = 0; }
             }
-            else if (pindah) {
+            else if (pindah)
+            {
                 double p = System.Windows.Forms.Cursor.Position.X;
-                    if (p < this.Left + this.Width / 2)
-                    {   image.Source = b.getbitmapkiri(x);
-                        this.Left -= 30;}
-                    else
-                    {   image.Source = b.getbitmapkanan(x);
-                        this.Left += 30;}
-                    if (x < 5){x++;}
-                    else{x = 0;}
+                if (p < this.Left + this.Width / 2)
+                {
+                    image.Source = b.getbitmapkiri(x);
+                    this.Left -= 30;
+                }
+                else
+                {
+                    image.Source = b.getbitmapkanan(x);
+                    this.Left += 30;
+                }
+                if (x < 5) { x++; }
+                else { x = 0; }
             }
         }
 
-        private void tunggu_tick(object o, EventArgs e) {
+        private void tunggu_tick(object o, EventArgs e)
+        {
             waktu.Stop();
-            if (t < 5){t++;}
-            else {
+            if (t < 5) { t++; }
+            else
+            {
+
                 BTKanan.Visibility = Visibility.Hidden;
                 MenuKanan.Visibility = Visibility.Hidden;
+                PindahKanan.Visibility = Visibility.Hidden;
+                DiamKanan.Visibility = Visibility.Hidden;
+                NoteKanan.Visibility = Visibility.Hidden;
                 BTKiri.Visibility = Visibility.Hidden;
                 MenuKiri.Visibility = Visibility.Hidden;
+                PindahKiri.Visibility = Visibility.Hidden;
                 DiamKiri.Visibility = Visibility.Hidden;
-                if (!gerak) {
-                    if ((this.Left + this.Width / 2) < SystemParameters.WorkArea.Width / 2){image.Source = b.getbitmapkanan(0);}
-                    else{image.Source = b.getbitmapkiri(0);}
+                NoteKiri.Visibility = Visibility.Hidden;
+
+                if (!gerak)
+                {
+                    if ((this.Left + this.Width / 2) < SystemParameters.WorkArea.Width / 2) { image.Source = b.getbitmapkanan(0); }
+                    else { image.Source = b.getbitmapkiri(0); }
                 }
                 tentu();
             }
         }
 
-        private void tentu() {
+        private void tentu()
+        {
             tunggu.Stop();
             klik = true;
             pindah = false;
+            
             if (gerak)
             {
                 r = (byte)rand.Next(0, 5);
@@ -347,6 +397,7 @@ namespace SimpleAssistant
                 x = 0;
                 tempuh = 0;
                 t = 0;
+                tunggu.Stop();
                 waktu.Start();
             }
         }

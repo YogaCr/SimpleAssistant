@@ -9,7 +9,7 @@
     <Grid>
         <Grid x:Name="BaloonText">
             <Image x:Name="BTKanan" HorizontalAlignment="Left" Height="287" Margin="303,55,0,0" VerticalAlignment="Top" Width="337" Source="baloon text.png" Visibility="Hidden"/>
-            <Image x:Name="BTKiri" Margin="1,11,312,183" Source="baloon text.png" RenderTransformOrigin="0.5,0.5" Height="287" Width="337" Visibility="Hidden">
+            <Image x:Name="BTKiri" Margin="1,6,312,188" Source="baloon text.png" RenderTransformOrigin="0.5,0.5" Height="287" Width="337" Visibility="Hidden">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="-1"/>
@@ -32,13 +32,13 @@
                 <Button x:Name="PilihKanan" Content="Pilih" HorizontalAlignment="Left" Margin="440,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
             </Grid>
             <Grid x:Name="MenuKiri" Visibility="Hidden">
-                <ComboBox x:Name="PilihanKiri" HorizontalAlignment="Left" Margin="58,147,0,0" VerticalAlignment="Top" Width="220" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Arial Rounded MT Bold" FontSize="16">
+                <ComboBox x:Name="PilihanKiri" HorizontalAlignment="Left" Margin="75,147,0,0" VerticalAlignment="Top" Width="220" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Arial Rounded MT Bold" FontSize="16">
                     <ComboBoxItem Content="Pindah"/>
                     <ComboBoxItem Content="Diam"/>
                     <ComboBoxItem Content="Note"/>
                 </ComboBox>
-                <Label x:Name="GreetingKiri" Content="ggg" HorizontalAlignment="Left" Margin="58,74,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="220" Height="68" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
-                <Button x:Name="PilihKiri" Content="Pilih" HorizontalAlignment="Left" Margin="130,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
+                <Label x:Name="GreetingKiri" Content="ggg" HorizontalAlignment="Left" Margin="75,74,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="220" Height="68" FontFamily="Arial Rounded MT Bold" FontSize="16"/>
+                <Button x:Name="PilihKiri" Content="Pilih" HorizontalAlignment="Left" Margin="147,172,0,0" VerticalAlignment="Top" Width="76" FontFamily="Arial Rounded MT Bold" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" Click="Pilih"/>
             </Grid>
         </Grid>
         <Grid x:Name="GridDiam">
@@ -87,18 +87,18 @@
                 <Button x:Name="TutupNoteKanan" Content="Tutup" HorizontalAlignment="Left" Margin="507,170,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
             </Grid>
             <Grid x:Name="NoteKiri" Visibility="Hidden">
-                <RichTextBox x:Name="TextKiri" HorizontalAlignment="Left" Height="56" Margin="61,115,0,0" VerticalAlignment="Top" Width="227" VerticalScrollBarVisibility="Auto" FontFamily="Arial Rounded MT Bold" Block.LineHeight="1" KeyUp="SimpanNote">
+                <RichTextBox x:Name="TextKiri" HorizontalAlignment="Left" Height="56" Margin="61,109,0,0" VerticalAlignment="Top" Width="227" VerticalScrollBarVisibility="Auto" FontFamily="Arial Rounded MT Bold" Block.LineHeight="1" KeyUp="SimpanNote">
                     <FlowDocument>
                         <Paragraph>
                             <Run Text=""/>
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
-                <ComboBox x:Name="ComboNoteKiri" HorizontalAlignment="Left" Margin="61,88,0,0" VerticalAlignment="Top" Width="151" BorderBrush="{x:Null}" Background="{x:Null}" SelectionChanged="NotePilih" FontFamily="Arial Rounded MT Bold"/>
-                <Button x:Name="TambahNoteKiri" Content="Tambah" HorizontalAlignment="Left" Margin="217,90,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TambahNote"/>
-                <Button x:Name="GantiNamaKiri" Content="Ganti" HorizontalAlignment="Left" Margin="78,176,0,0" VerticalAlignment="Top" Width="52" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="GantiNote"/>
-                <Button x:Name="HapusKiri" Content="Hapus" HorizontalAlignment="Left" Margin="141,176,0,0" VerticalAlignment="Top" Width="53" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="HapusNote"/>
-                <Button x:Name="TutupNoteKiri" Content="Tutup" HorizontalAlignment="Left" Margin="204,176,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
+                <ComboBox x:Name="ComboNoteKiri" HorizontalAlignment="Left" Margin="61,82,0,0" VerticalAlignment="Top" Width="151" BorderBrush="{x:Null}" Background="{x:Null}" SelectionChanged="NotePilih" FontFamily="Arial Rounded MT Bold"/>
+                <Button x:Name="TambahNoteKiri" Content="Tambah" HorizontalAlignment="Left" Margin="217,84,0,0" VerticalAlignment="Top" Width="61" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TambahNote"/>
+                <Button x:Name="GantiNamaKiri" Content="Ganti" HorizontalAlignment="Left" Margin="78,170,0,0" VerticalAlignment="Top" Width="52" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="GantiNote"/>
+                <Button x:Name="HapusKiri" Content="Hapus" HorizontalAlignment="Left" Margin="141,170,0,0" VerticalAlignment="Top" Width="53" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="HapusNote"/>
+                <Button x:Name="TutupNoteKiri" Content="Tutup" HorizontalAlignment="Left" Margin="204,170,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontFamily="Arial Rounded MT Bold" Click="TutupNote"/>
             </Grid>
         </Grid>
     </Grid>

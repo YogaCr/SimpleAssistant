@@ -10,10 +10,11 @@ namespace SimpleAssistant
         string greeting;
         string lokasi = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDoc‌​uments), "SimpleAI");
 
-        public bool ScriptDiam(ComboBox PilihanDiam, Image BalonTeks,Grid Diam) {
+        public bool ScriptDiam(ComboBox PilihanDiam, Image BalonTeks, Grid Diam)
+        {
             BalonTeks.Visibility = Visibility.Hidden;
             Diam.Visibility = Visibility.Hidden;
-            if (PilihanDiam.Text== "On")
+            if (PilihanDiam.Text == "On")
             {
                 return false;
             }
@@ -21,10 +22,11 @@ namespace SimpleAssistant
             {
                 return true;
             }
-                   
+
         }
 
-        public void Ucapan(Label ucap) {
+        public void Ucapan(Label ucap)
+        {
             if (DateTime.Now.Hour <= 10)
             {
                 greeting = "Selamat Pagi\n";
@@ -46,33 +48,45 @@ namespace SimpleAssistant
             ucap.Visibility = Visibility.Visible;
         }
 
-        public string BukaNote(string nama) {
+        public string BukaNote(string nama)
+        {
             string kalimat = "";
             try
             {
-                using (StreamReader sr = new StreamReader(@lokasi+"/"+nama))
+                using (StreamReader sr = new StreamReader(@lokasi + "/" + nama))
                 {
                     kalimat = sr.ReadToEnd();
                 }
             }
-            catch {
-                
+            catch
+            {
+
             }
             return kalimat;
         }
 
-        public void SimpanNote(RichTextBox Note,string nama) {
-            using (StreamWriter sw = new StreamWriter(@lokasi+"/"+nama)) {
-                sw.Write(new TextRange(Note.Document.ContentStart, Note.Document.ContentEnd).Text);
-                sw.Close();
+        public void SimpanNote(RichTextBox Note, string nama)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(@lokasi + "/" + nama))
+                {
+                    sw.Write(new TextRange(Note.Document.ContentStart, Note.Document.ContentEnd).Text);
+                    sw.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        public void LoadNote(ComboBox c,Grid Menu,Grid Note) {
+        public void LoadNote(ComboBox c, Grid Menu, Grid Note)
+        {
             Menu.Visibility = Visibility.Hidden;
             Note.Visibility = Visibility.Visible;
             c.Items.Clear();
-            System.IO.Directory.CreateDirectory(lokasi);
+            System.IO.Directory.CreateDirectory(@lokasi);
             DirectoryInfo di = new DirectoryInfo(@lokasi);
             FileInfo[] tf = di.GetFiles("*.txt");
             foreach (var v in tf)
@@ -84,7 +98,8 @@ namespace SimpleAssistant
             }
         }
 
-        public void GantiNama(string namalama,string namabaru) {
+        public void GantiNama(string namalama, string namabaru)
+        {
             try { File.Move(@lokasi + "/" + namalama, @lokasi + "/" + namabaru); }
             catch
             {
@@ -92,18 +107,20 @@ namespace SimpleAssistant
             }
         }
 
-        public void HapusNote(string nama) {
+        public void HapusNote(string nama)
+        {
             try
             {
                 File.Delete(@lokasi + "/" + nama);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
         }
 
-        public void TutupNote(Image BT,Grid Note) {
+        public void TutupNote(Image BT, Grid Note)
+        {
             BT.Visibility = Visibility.Hidden;
             Note.Visibility = Visibility.Hidden;
         }
